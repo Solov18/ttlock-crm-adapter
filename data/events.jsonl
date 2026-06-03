@@ -1,0 +1,14 @@
+{"ts": 1780488461628, "action": "crm_maindoor_unlock", "result": "success", "payload": {"errcode": 0, "errmsg": "none error message or means yes", "description": "表示成功或是"}}
+{"ts": 1780488516098, "action": "add_pin", "result": "success", "payload": {"apartment": 999, "keyboardPwdId": 81441654}}
+{"ts": 1780488531450, "action": "apartment_cgi", "result": "error", "payload": {"errcode": -3007, "errmsg": "The same passcode already exists. Please use another one.", "description": "已存在相同的密码，请更换。"}}
+{"ts": 1780488553500, "action": "apartment_cgi", "result": "error", "payload": {"errcode": -2032, "errmsg": "Passcode is too simple. Please avoid consecutive or repeated digits.", "description": "密码过于简单，请勿使用连续数字或重复数字"}}
+{"ts": 1780488608928, "action": "add_pin", "result": "success", "payload": {"apartment": 999, "keyboardPwdId": 81441970}}
+{"ts": 1780488848410, "action": "apartment_cgi", "result": "error", "payload": {"errcode": 1, "errmsg": "failed or means no", "description": "表示失败或否"}}
+{"ts": 1780488871790, "action": "delete_pin", "result": "success", "payload": {"apartment": 999}}
+{"ts": 1780489800736, "action": "add_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": 153165548}}
+{"ts": 1780490010459, "action": "mifare_cgi", "result": "error", "payload": {"errcode": 1, "errmsg": "failed or means no", "description": "表示失败或否"}}
+{"ts": 1780490030348, "action": "delete_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": null}}
+{"ts": 1780497208551, "action": "delete_pin", "result": "success", "payload": {"apartment": 999, "deletedIds": []}}
+{"ts": 1780497778050, "action": "delete_pin", "result": "success", "payload": {"apartment": 999, "deletedIds": [81441970, 81441654]}}
+{"ts": 1780497890630, "action": "add_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": 153192510}}
+{"ts": 1780497944332, "action": "delete_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": 153192510}}
