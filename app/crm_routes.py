@@ -105,6 +105,75 @@ UpTime=00:24:27
         battery = await ttlock.battery()
         return {"model": detail.get("modelNum", "TTLock"), "deviceModel": detail.get("lockName", "TTLock Smart Lock"), "lockId": settings.ttlock_lock_id, "mac": detail.get("lockMac"), "battery": battery.get("electricQuantity"), "registerStatus": True}
 
+    @router.put("/relay/{relay_id}/open")
+    async def relay_open(relay_id: int):
+        try:
+            result = await ttlock.unlock()
+
+            log_event(
+                "crm_relay_open",
+                "success",
+                {
+                    "relay_id": relay_id,
+                    "result": result,
+                },
+            )
+
+            return {"result": "ok"}
+
+        except TTLockAPIError as e:
+            log_event("crm_relay_open", "error", e.payload)
+
+            return JSONResponse(
+                status_code=502,
+                content={
+                    "error": "Ошибка открытия реле",
+                    "details": e.payload,
+                },
+            )
+
+    @router.get("/levels")
+    async def levels():
+        return {"levels": []}
+
+    @router.get("/key/settings")
+    async def key_settings():
+        return {"enabled": True}
+
+    @router.get("/gate/settings")
+    async def gate_settings():
+        return {
+            "enabled": True,
+            "relays": 1,
+        }
+
+    @router.get("/v2/system/versions")
+    async def system_versions():
+        return {
+            "software": "0.2.0",
+            "hardware": "TTLock Gateway",
+            "api": "ttlock-crm-adapter",
+        }
+
+    @router.get("/openCode")
+    async def open_code():
+        return {"enabled": True}
+
+    @router.get("/panelDisplay/settings")
+    async def panel_display_settings():
+        return {"enabled": False}
+
+    @router.get("/panelCode/settings")
+    async def panel_code_settings():
+        return {"enabled": True}
+
+    @router.get("/v1/mcu/info")
+    async def mcu_info():
+        return {
+            "model": "TTLock",
+            "version": "0.2.0",
+        }
+
     @router.get("/cgi-bin/pwdgrp_cgi")
     async def pwdgrp_cgi(username: str | None = None, password: str | None = None, action: str | None = None):
         if username == "admin" and password == "admin" and action == "update":

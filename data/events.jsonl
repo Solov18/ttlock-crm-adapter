@@ -12,3 +12,4 @@
 {"ts": 1780497778050, "action": "delete_pin", "result": "success", "payload": {"apartment": 999, "deletedIds": [81441970, 81441654]}}
 {"ts": 1780497890630, "action": "add_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": 153192510}}
 {"ts": 1780497944332, "action": "delete_card", "result": "success", "payload": {"cardNumber": "2964852039", "cardId": 153192510}}
+{"ts": 1780562468505, "action": "restart_stub", "result": "success", "payload": {}}
