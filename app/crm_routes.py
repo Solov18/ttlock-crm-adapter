@@ -101,9 +101,25 @@ UpTime=00:24:27
 
     @router.get("/system/info")
     async def system_info():
-        detail = await ttlock.lock_detail()
-        battery = await ttlock.battery()
-        return {"model": detail.get("modelNum", "TTLock"), "deviceModel": detail.get("lockName", "TTLock Smart Lock"), "lockId": settings.ttlock_lock_id, "mac": detail.get("lockMac"), "battery": battery.get("electricQuantity"), "registerStatus": True}
+        try:
+            detail = await ttlock.lock_detail()
+        except Exception:
+            detail = {}
+
+        try:
+            battery = await ttlock.battery()
+            battery_level = battery.get("electricQuantity", 0)
+        except Exception:
+            battery_level = 0
+
+        return {
+            "model": detail.get("modelNum", "TTLock"),
+            "deviceModel": detail.get("lockName", "TTLock Smart Lock"),
+            "lockId": settings.ttlock_lock_id,
+            "mac": detail.get("lockMac"),
+            "battery": battery_level,
+            "registerStatus": True,
+        }
 
     @router.put("/relay/{relay_id}/open")
     async def relay_open(relay_id: int):
